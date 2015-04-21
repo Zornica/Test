@@ -27,6 +27,7 @@ public class SchoolTest {
     student.add(zornica);
     assertThat(student.sortMarks("Informatika"), is("18010,5.9 18000,5.2 "));
   }
+
   @Test
   public void sortAllStudents() {
     Student ivan = new Student("Ivan", 18000, "Informatika", 5.20);
@@ -38,7 +39,7 @@ public class SchoolTest {
     student.remove(1);
     student.sortNumber();
     final StringBuilder buffer = new StringBuilder();
-    student.print(new Display(){
+    student.print(new Display() {
 
       @Override
       public void print(Student value) {
@@ -47,8 +48,29 @@ public class SchoolTest {
     });
     assertThat(buffer.toString(), is("18000 18007 "));
   }
+
   @Test(expected = IndexOutOfBoundsException.class)
-  public void removeOfEmptyList(){
+  public void removeOfEmptyList() {
     student.remove(0);
+  }
+
+  @Test
+  public void removeByName() {
+    Student ivan = new Student("Ivan", 18000, "Informatika", 5.20);
+    Student kaloqn = new Student("Kaloqn", 18010, "Informatika", 5.90);
+    Student zornica = new Student("Zornica", 18007, "Matematika", 5.95);
+    student.add(ivan);
+    student.add(kaloqn);
+    student.add(zornica);
+    student.removeByName("Ivan");
+    final StringBuilder buffer = new StringBuilder();
+    student.print(new Display() {
+
+      @Override
+      public void print(Student value) {
+        buffer.append(value.getName()).append(" ");
+      }
+    });
+    assertThat(buffer.toString(), is("Kaloqn Zornica "));
   }
 }

@@ -27,4 +27,8 @@ public class Student {
   public int getNumber() {
     return number;
   }
+
+  public String getName() {
+    return name;
+  }
 }
